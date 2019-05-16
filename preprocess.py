@@ -21,6 +21,13 @@ def preprocess_ljspeech(args):
   metadata = ljspeech.build_from_path(in_dir, out_dir, args.num_workers, tqdm=tqdm)
   write_metadata(metadata, out_dir)
 
+def preprocess_csmsc(args):
+  in_dir = os.path.join(args.base_dir, 'CSMSC')
+  out_dir = os.path.join(args.base_dir, args.output)
+  os.makedirs(out_dir, exist_ok=True)
+  metadata = ljspeech.build_from_path(in_dir, out_dir, args.num_workers, tqdm=tqdm)
+  write_metadata(metadata, out_dir)
+
 
 def write_metadata(metadata, out_dir):
   with open(os.path.join(out_dir, 'train.txt'), 'w', encoding='utf-8') as f:
@@ -37,7 +44,7 @@ def main():
   parser = argparse.ArgumentParser()
   parser.add_argument('--base_dir', default=os.path.expanduser('~/tacotron'))
   parser.add_argument('--output', default='training')
-  parser.add_argument('--dataset', required=True, choices=['blizzard', 'ljspeech'])
+  parser.add_argument('--dataset', required=True, choices=['blizzard', 'ljspeech', 'csmsc'])
   parser.add_argument('--num_workers', type=int, default=cpu_count())
   args = parser.parse_args()
   if args.dataset == 'blizzard':
