@@ -1,7 +1,11 @@
 __pycache__/
 .cache/
+CSMSC/
+training/
 *.pyc
 .DS_Store
 run*.sh
 model.ckpt.data-00000-of-00001
 model.ckpt.index
+
+logs-tacotron/
