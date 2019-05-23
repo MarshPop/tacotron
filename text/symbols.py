@@ -11,7 +11,7 @@ _pad        = '_'
 _eos        = '~'
 
 # _characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!\'(),-.:;? '
-_characters = '012345abcdefghijklmnopqrstuvwxyz'
+_characters = '12345abcdefghijklmnopqrstuvwxyz '
 
 # Prepend "@" to ARPAbet symbols to ensure uniqueness (some are the same as uppercase letters):
 _arpabet = ['@' + s for s in cmudict.valid_symbols]

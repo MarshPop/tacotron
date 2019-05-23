@@ -25,31 +25,34 @@ def build_from_path(in_dir, out_dir, num_workers=1, tqdm=lambda x: x):
     futures = []
     index = 1
 
-    # TODO: Txt Name
     with open(os.path.join(in_dir, 'ProsodyLabeling', '000001-010000.txt'), encoding='utf-8') as f:
         phone = 0
-        word_sep = []
+        # word_sep = []
         for line in f:
-            if index > 10: #
+            if index > 1000: # Demo
                 break
             if phone == 0:
                 parts = line.strip().split()
                 wav_path = os.path.join(in_dir, 'Wave', '%s.wav' % parts[0])
-                word_sep = re.split(r'#[1|2|3|4|5][，|。]*', parts[1])
+                # word_sep = re.split(r'#[1|2|3|4|5][，|。]*', parts[1])
                 phone = 1
             else:
                 text = line.strip().split()
                 out = ''
+                '''
                 k = 0
                 cnt = 0
+                '''
                 for i in range(len(text)):
                     if i != 0:
                         out += ' '
                     out += text[i]
+                    '''
                     if i == k + len(word_sep[cnt]) - 1:
                         out += ' 0'
                         k += len(word_sep[cnt])
                         cnt += 1
+                    '''
                 futures.append(executor.submit(
                     partial(_process_utterance, out_dir, index, wav_path, out)))
                 index += 1
